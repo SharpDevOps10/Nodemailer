@@ -1,4 +1,12 @@
-FROM ubuntu:latest
-LABEL authors="daniorerio"
+FROM node:20-alpine
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [ "node", "/src/main.ts" ]
